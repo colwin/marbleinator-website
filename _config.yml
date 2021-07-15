@@ -57,7 +57,7 @@ features                                  :
 
   - title                                 : Works Offline
     description                           : No internet access needed! The game works completely offline. 
-    fontawesome_icon_name                 : wifi-slash
+    fontawesome_icon_name                 : wifi
 
 # Theme Settings
 topbar_color                              : "#000000"
