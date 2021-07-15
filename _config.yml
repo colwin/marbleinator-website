@@ -55,6 +55,10 @@ features                                  :
     description                           : Popping marbles is fun for all ages. The secret to getting a 3 star score is to end the game with the smallest marbles you can. 
     fontawesome_icon_name                 : heart
 
+  - title                                 : Works Offline
+    description                           : No internet access needed! The game works completely offline. 
+    fontawesome_icon_name                 : wifi-slash
+
 # Theme Settings
 topbar_color                              : "#000000"
 topbar_transparency                       : 0.1
