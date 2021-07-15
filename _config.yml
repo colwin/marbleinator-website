@@ -26,8 +26,8 @@ your_city                                 : Pune
 email_address                             : support@relaxonome.com
 facebook_username                         :                                           
 instagram_username                        : 
-twitter_username                          : colwinf
-github_username                           : colwin
+twitter_username                          : relaxonome
+github_username                           : 
 youtube_username                          :
 
 
@@ -52,7 +52,7 @@ features                                  :
     fontawesome_icon_name                 : ban
 
   - title                                 : Fun for all ages
-    description                           : Popping the marbles is fun for all ages. The secret to getting a 3 star score is to end the game with the smallest marbles you can. 
+    description                           : Popping marbles is fun for all ages. The secret to getting a 3 star score is to end the game with the smallest marbles you can. 
     fontawesome_icon_name                 : heart
 
 # Theme Settings
