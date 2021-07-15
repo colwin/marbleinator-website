@@ -39,7 +39,7 @@ features                                  :
     description                           : Choose between multiple colourful marble packs! 
     fontawesome_icon_name                 : magic
     
-  - title                                 : Difficulty Levels
+  - title                                 : Multiple Difficulty Levels
     description                           : Pick your difficulty level to play on. Choose between Easy, Medium and Hard. Each level has its own challenges.
     fontawesome_icon_name                 : hat-wizard
 
@@ -51,7 +51,7 @@ features                                  :
     description                           : The app is supported by your dollars. So we don't need to add invasive tracking to serve you advertising. 
     fontawesome_icon_name                 : ban
 
-  - title                                 : Fun for all ages
+  - title                                 : Fun For All Ages
     description                           : Popping marbles is fun for all ages. The secret to getting a 3 star score is to end the game with the smallest marbles you can. 
     fontawesome_icon_name                 : heart
 
