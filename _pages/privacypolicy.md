@@ -15,7 +15,7 @@ This Privacy Policy describes how your personal information is handled in Marble
 <br>
 
 ## We Collect No Personal Information Using Our Applications
-We do not collect, use, save, or have access to any of your personal data in Marble-O-Tron for iOS
+We do not collect, use, save, or have access to any of your personal data in Marble-O-Tron for iOS.
 Individual settings relating to the Marble-O-Tron apps are not personal and are stored only on your device.
 
 <br>
