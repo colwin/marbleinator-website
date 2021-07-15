@@ -5,7 +5,7 @@ include_in_header: true
 ---
 
 
-# We'd love to hear from you
+# We'd love to hear from you!
 
 ## Drop us a note on support@relaxonome.com
 
