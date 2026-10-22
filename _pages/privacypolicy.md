@@ -33,6 +33,7 @@ All apps do not require an account and do not include advertising, analytics, or
 <br>
 Race Schedules and Results
 <br>
+<br>
 The app connects to the Jolpica-F1 service to retrieve public motorsport schedules and results. These requests may include standard technical information automatically transmitted with internet connections, such as an IP address and device networking information.
 <br>
 <br>
