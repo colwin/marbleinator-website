@@ -35,19 +35,24 @@ Race Schedules and Results
 <br>
 The app connects to the Jolpica-F1 service to retrieve public motorsport schedules and results. These requests may include standard technical information automatically transmitted with internet connections, such as an IP address and device networking information.
 <br>
+<br>
 Race Calendar does not attach your name, email address, advertising identifier, precise location, or other account information to these requests. Jolpica-F1 may process request information according to its own privacy practices.
 <br>
+<br>
 Calendar Access
+<br>
 <br>
 Calendar access is optional. If you choose to add a race session or weekend to Calendar, the app requests write-only access through Apple’s EventKit framework.
 <br>
 Race Calendar:
 <br>
-• Adds only the events you select
-• Does not read your existing Calendar events
-• Does not upload Calendar information
-• Does not share Calendar information
-• Does not access Calendar until you use an add-to-Calendar feature
+<ul>
+<li>Adds only the events you select</li>
+<li>Does not read your existing Calendar events</li>
+<li>Does not upload Calendar information</li>
+<li>Does not share Calendar information</li>
+<li>Does not access Calendar until you use an add-to-Calendar feature</li>
+</ul>
 <br>
 Calendar permission can be changed at any time in your device’s Settings.
 <br>
