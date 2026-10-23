@@ -1,74 +1,42 @@
-#page title
-page_title                                :                                           # Automatically populates with app name if not set and if iOS app ID is set. Otherwise enter manually.
+# Custom domain (GitHub Pages)
+url: "https://relaxonome.com"
+baseurl: ""
+# Local preview with github.io paths: jekyll serve --config _config.yml,_config_dev.yml
 
-# App Info
-ios_app_id                                : 1575184675                                # Required. Enter iOS app ID to automatically populate name, price and icons (e.g. 718043190).
-ios_app_country                           : us                                        # Required outside USA. Enter 2 letter country code as in https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
+# Site Info (portfolio homepage)
+page_title                                : Relaxonome Studios
+site_description                          : A collection of mobile apps crafted with love.
+ios_app_country                           : us
 
-appstore_link                             :                                           # Automatically populates if not set and if iOS app ID is set. Otherwise enter manually.
-playstore_link                            :                                           # Enter Google Play Store URL.
-presskit_download_link                    :                                         # Enter a link to downloadable file or (e.g. public Dropbox link to a .zip file). 
-                                                                                      # Or upload your press kit file to assets and set path accordingly (e.g. "assets/your_press_kit.zip").
-
-app_icon                                  : # assets/appicon.png                      # Automatically populates if not set and if iOS app ID is set.  Otherwise enter path to icon file manually.
-app_name                                  :                                           # Automatically populates if not set and if iOS app ID is set.  Otherwise enter manually.
-app_price                                 :                                           # Automatically populates if not set and if iOS app ID is set.  Otherwise enter manually.
-app_description                           : A relaxing and satisfying marble matching game
-
-enable_smart_app_banner                   : true                                      # Set to true to show a smart app banner at top of page on mobile devices.
-
-
+enable_smart_app_banner                   : false
+auto_load_app_store_screenshots           : true
 
 # Information About Yourself
-your_name                                 : Relaxonome Game Studios                            
-your_link                                 :                      
-your_city                                 : Pune, India
-email_address                             : support@relaxonome.com
-facebook_username                         :                                           
-instagram_username                        : 
-twitter_username                          : relaxonome
-github_username                           : 
+your_name                                 :
+your_link                                 :
+your_city                                 :
+email_address                             :
+linkedin_username                         :
+linkedin_company                          :
+facebook_username                         :
+instagram_username                        :
+twitter_username                          :
+github_username                           :
 youtube_username                          :
+mastodon_link                             :
 
+presskit_download_link                    :
 
-
-# Feature List                            Edit, add or remove features to be presented.
-features                                  :
-
-  - title                                 : Multiple Marble Packs
-    description                           : Choose between multiple colourful marble packs! 
-    fontawesome_icon_name                 : magic
-    
-  - title                                 : Multiple Difficulty Levels
-    description                           : Pick your difficulty level to play on. Choose between Easy, Medium and Hard. Each level has its own challenges.
-    fontawesome_icon_name                 : hat-wizard
-
-  - title                                 : No In-App Purchases
-    description                           : Pay one price and enjoy lifetime updates to the app. We will be adding more marble packs and possibly game modes soon!
-    fontawesome_icon_name                 : money-bill-alt
-
-  - title                                 : No Advertising
-    description                           : The app is supported by your dollars. So we don't need to add invasive tracking to serve you advertising. 
-    fontawesome_icon_name                 : ban
-
-  - title                                 : Fun For All Ages
-    description                           : Popping marbles is fun for all ages. The secret to getting a 3 star score is to try and make the longest marble chains and popping them all in one go. Larger marbles give you higher scores when popped.
-    fontawesome_icon_name                 : heart
-
-  - title                                 : Works Offline
-    description                           : No internet access needed! The game works completely offline. 
-    fontawesome_icon_name                 : wifi
-
-# Theme Settings
+# Theme Settings (shared across all app pages)
 topbar_color                              : "#000000"
 topbar_transparency                       : 0.1
 topbar_title_color                        : "#ffffff"
 
-cover_image                               : assets/headerimage.jpg                    # Replace with alternative image path or image URL.
+cover_image                               : assets/headerimage.png
 cover_overlay_color                       : "#363b3d"
 cover_overlay_transparency                : 0.8
 
-device_color                              : black                                     # Set to: blue, black, yellow, coral or white.
+device_color                              : black
 
 body_background_color                     : "#ffffff"
 
@@ -89,27 +57,13 @@ social_icons_background_color             : "#e6e6e6"
 
 footer_text_color                         : "#666666"
 
-
-
-
-
-
-
-
-
-
-
-
-
 ####################################################
 ### Jekyll Configuration. No need to touch this. ###
 ####################################################
 
-# Set the Sass partials directory, as we're using @imports
 sass:
-  style: :compressed # You might prefer to minify using :compressed
+  style: :compressed
 
-# Exclude these files from your production _site
 exclude:
   - LICENSE
   - README.md
@@ -119,6 +73,11 @@ collections:
   pages:
     output: true
     permalink: /:path/
+  apps:
+    output: true
+    permalink: /apps/:name/
+  legal:
+    output: true
+    permalink: /apps/:path/
 
-# Markdown rendering
 markdown: kramdown

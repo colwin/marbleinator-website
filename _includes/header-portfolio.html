@@ -1,0 +1,15 @@
+<header class="portfolioHeaderBar">
+	<nav class="scroll portfolioNav">
+		<ul>
+			{% for page in site.pages %}
+				{% if page.include_in_header == true %}
+				<li><a href="{{ page.url | relative_url }}" target="_self">{{ page.title }}</a></li>
+				{% endif %}
+			{% endfor %}
+			{% if site.presskit_download_link %}
+				<li><a href="{{ site.presskit_download_link }}">Press Kit</a></li>
+			{% endif %}
+		</ul>
+	</nav>
+	{% include lang-toggle.html modifier="langToggle--onDark" %}
+</header>

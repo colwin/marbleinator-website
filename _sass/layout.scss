@@ -1,5 +1,6 @@
 .imageWrapper {					// Sets the background image in the header area
-	height: 714px;
+	min-height: 714px;
+	height: auto;
 	background: 
 		linear-gradient(
 		rgba($image-overlay-color, $image-overlay-transparency), 
@@ -20,10 +21,44 @@
 	background-color: rgba($header-color, $header-transparency);
 }
 
+.portfolioHeaderBackground,
+.appHeroBackground {
+	height: auto;
+	min-height: 115px;
+}
+
+.appHero {
+	min-height: 0;
+}
+
+.appBody {
+	background-color: $body-color;
+}
+
+.appBodyContainer {
+	display: grid;
+	margin: auto;
+	max-width: $content-width;
+	padding-left: 15px;
+	padding-right: 15px;
+	grid-template-columns: repeat(12, 1fr);
+	grid-template-rows: auto auto;
+	grid-column-gap: 30px;
+	grid-template-areas:
+		"c c c c c c c c c c c c"
+		"f f f f f f f f f f f f";
+}
+
 @media only screen and (max-width: 768px) {
 
 	.headerBackground {
-		height: 80px;
+		height: auto;
+		min-height: 0;
+	}
+
+	.imageWrapper {
+		min-height: 0;
+		border-radius: 0 0 24px 24px;
 	}
 
 }
@@ -39,7 +74,7 @@
 	padding-left: 15px;
 	padding-right: 15px;
 	grid-template-columns: repeat(12, 1fr);
-	grid-template-rows: 115px 876px auto auto;
+	grid-template-rows: 115px auto auto auto;
 	grid-column-gap: 30px;
 	grid-template-areas: 
 		"h h h h h h h h h h h h"
@@ -53,25 +88,112 @@
 	background-color: #fff;
 }
 
+// App detail hero — MUST come after .container (same class specificity otherwise loses)
+.container.appHeroContainer {
+	grid-template-columns: repeat(12, 1fr);
+	grid-template-rows: auto auto;
+	grid-template-areas:
+		"h h h h h h h h h h h h"
+		"p p p p p i i i i i i i";
+	align-items: start;
+}
+
+@media only screen and (max-width: 992px) {
+	// Flex column beats grid area conflicts on phones
+	.container.appHeroContainer {
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+		justify-content: flex-start;
+		gap: 16px;
+		grid-template-columns: none;
+		grid-template-rows: none;
+		grid-template-areas: none;
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+
+	.container.appHeroContainer > header,
+	.container.appHeroContainer > .iphonePreviewBlock,
+	.container.appHeroContainer > .appInfo {
+		width: 100%;
+		max-width: 100%;
+		min-width: 0;
+		flex: 0 0 auto;
+	}
+
+	.container.appHeroContainer > .iphonePreviewBlock {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		order: 2;
+		margin-top: 8px;
+		margin-bottom: 0;
+	}
+
+	.container.appHeroContainer > header {
+		order: 1;
+	}
+
+	.container.appHeroContainer > .appInfo {
+		order: 3;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+	}
+}
+
 @media only screen and (max-width: 768px) {
 
-	.container {					// Set up the container for the site content
-		grid-template-rows: 80px 811px auto auto;
+	.container.portfolioHeroContainer,
+	.container.portfolioAppsContainer,
+	.container.appBodyContainer,
+	.container.appHeroContainer {
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+
+	.container.subPageContainer {
+		grid-template-rows: auto auto auto auto;
+		padding-left: 20px;
+		padding-right: 20px;
 	}
 }
 
 @media only screen and (max-width: 992px) {
 
-	.container {
-		grid-column-gap: 0px;
-		grid-template-columns: 1;
-		grid-template-rows: 115px auto auto auto auto;
-		grid-template-areas: 
-			"h h h h h h h h h h h h"
-			"i i i i i i i i i i i i"
-			"p p p p p p p p p p p p"
-			"c c c c c c c c c c c c"
-			"f f f f f f f f f f f f";
+	.container.portfolioHeroContainer,
+	.container.portfolioAppsContainer {
+		grid-column-gap: 0;
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.container.portfolioHeroContainer {
+		grid-template-rows: auto auto;
+		grid-template-areas:
+			"h"
+			"t";
+	}
+
+	.container.portfolioAppsContainer {
+		grid-template-rows: auto auto;
+		grid-template-areas:
+			"g"
+			"f";
+	}
+
+	.container.appBodyContainer {
+		display: flex;
+		flex-direction: column;
+		grid-template-columns: none;
+		grid-template-areas: none;
+		gap: 0;
+	}
+
+	.container.appBodyContainer > .appDetailsColumn,
+	.container.appBodyContainer > footer {
+		width: 100%;
 	}
 }
 
@@ -116,14 +238,21 @@ header {
 @media only screen and (max-width: 768px) {
 
 	.logo {
-		height: 80px;
-		margin-right: 0px;
+		height: auto;
+		min-height: 48px;
+		margin-right: 0;
+		justify-content: center;
+		padding: 8px 0 4px;
 	}
 
 	.logo > p {
 		display: none;
 	}
-	
+
+	.divider {
+		display: none;
+	}
+
 } 
 
 .headerIcon {
@@ -132,19 +261,6 @@ header {
 	-webkit-clip-path: url(#shape);
 	clip-path: url(#shape);
 }
-
-@media only screen and (max-width: 768px) {
-
-	.divider {
-		position: relative;
-		min-width: 1px;
-		max-width: 1px;
-		background-color:rgba(127, 127, 127, 0.2);
-		display: inline-block;
-		margin-left: 15px;
-	}	
-	
-} 
 
 
 // Navigation Links
@@ -166,14 +282,49 @@ header {
 
 @media only screen and (max-width: 768px) {
 
+	header {
+		flex-direction: column;
+		align-items: stretch;
+		margin-right: 0;
+		gap: 4px;
+		padding-bottom: 8px;
+	}
+
 	.scroll {
-		height: 80px;
-		padding-top: 100px;
-		padding-bottom: 100px;
-		margin-top: -60px;
+		height: auto;
+		min-height: 44px;
+		padding-top: 0;
+		padding-bottom: 0;
+		margin-top: 0;
 		justify-content: flex-start;
-	}	
-	
+		align-items: center;
+		width: 100%;
+	}
+
+	nav > ul {
+		font-size: 1.5rem;
+	}
+
+	.appHeroContainer header {
+		flex-direction: row;
+		flex-wrap: nowrap;
+		align-items: center;
+		gap: 8px;
+		padding-bottom: 4px;
+	}
+
+	.portfolioHeroContainer header,
+	.portfolioHeaderBar {
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.portfolioNav.scroll {
+		width: auto;
+		justify-content: flex-start;
+	}
+
 } 
 
 .scroll::-webkit-scrollbar {
@@ -246,15 +397,67 @@ nav > ul li a:active {
 	grid-area: i;
 	display: flex;
 	flex-wrap: wrap;
-	padding-top: 140px;
+	padding-top: 80px;
+	padding-bottom: 40px;
 	align-content: flex-start;
 }
 
 @media only screen and (max-width: 992px) {
 
 	.appInfo {
-		padding-top: 50px;
+		flex-direction: column;
+		align-items: center;
+		gap: 20px;
+		padding-top: 24px;
+		padding-bottom: 36px;
+	}
+
+	.appIconShadow {
+		width: auto;
 		justify-content: center;
+	}
+
+	.appNamePriceContainer {
+		width: 100%;
+		margin-left: 0;
+		align-items: center;
+	}
+
+	.appName {
+		margin-top: 0;
+		text-align: center;
+		font-size: 2.6rem;
+		line-height: 1.25;
+	}
+
+	.appPrice {
+		margin-top: 8px;
+		text-align: center;
+	}
+
+	.appDescriptionContainer {
+		font-size: 1.7rem;
+		margin-top: 0;
+		line-height: 1.55;
+		text-align: center;
+	}
+
+	.downloadButtonsContainer {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 12px;
+		width: 100%;
+		margin-top: 4px;
+	}
+
+	.appStore,
+	.playStore {
+		height: 54px;
+		width: auto;
+		max-width: min(220px, 100%);
+		margin-right: 0;
+		margin-bottom: 0;
 	}
 
 } 
@@ -292,23 +495,12 @@ nav > ul li a:active {
 
 @media only screen and (max-width: 768px) {
 
-	.appNamePriceContainer {
-		width: 100%;
-		margin-left: 0px;
-		align-items: center;
-		justify-content: center;
+	.appInfo {
+		padding-top: 20px;
+		padding-bottom: 28px;
+		gap: 16px;
 	}
 
-	.appName {
-		margin-top: 30px;
-		text-align: center;
-	}
-	
-	.appPrice {
-		margin-top: 13px;
-		text-align: center;
-	}
-	
 } 
 
 .appDescriptionContainer {
@@ -378,108 +570,198 @@ nav > ul li a:active {
 
 // iPhone Device Preview
 
-.iphonePreview {
+.iphonePreviewBlock {
 	grid-area: p;
-	background-image: url($device-color);
-	background-size: 400px auto;
+	margin-top: 32px;
+	margin-bottom: 24px;
+	--frame-w: 400px;
+	--screen-x: 26px;
+	--screen-y: 23px;
+	--screen-w: 349px;
+	--screen-h: 755px;
+	--screen-gap: 6px;
+	--screen-radius: 34px;
+}
+
+.iphonePreview {
+	position: relative;
+	width: var(--frame-w);
+	height: calc(var(--frame-w) * 1784 / 890);
+	flex-shrink: 0;
 	background-repeat: no-repeat;
-	margin-top: 68px;
+	background-size: var(--frame-w) auto;
+	background-position: top center;
+}
+
+.iphoneScreenWrapper {
+	position: absolute;
+	z-index: 1;
+	left: calc(var(--screen-x) + var(--screen-gap));
+	top: calc(var(--screen-y) + var(--screen-gap));
+	width: calc(var(--screen-w) - 2 * var(--screen-gap));
+	height: calc(var(--screen-h) - 2 * var(--screen-gap));
+	overflow: hidden;
+	border-radius: calc(var(--screen-radius) - var(--screen-gap));
+	background-color: #111;
 }
 
 .iphoneScreen {
-	width: 349px;
-	-webkit-clip-path: url(#screenMask);
-	clip-path: url(#screenMask);
-	margin-left: 26px;
-	margin-top: 23px;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: top center;
+	display: block;
+	background-color: #111;
+}
+
+.iphoneScreen.is-loading {
+	opacity: 0.35;
+}
+
+.iphoneScreen.is-loaded {
+	opacity: 1;
 }
 
 .videoContainer {
-	width: 349px;
-	height: 755px;
-	-webkit-clip-path: url(#screenMask);
-	clip-path: url(#screenMask);
-	margin-left: 26px;
-	margin-top: 23px;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	border-radius: inherit;
 }
 
 .videoContainer > video {
-	width: 349px;
-	height: 755px;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: top center;
+	display: block;
+	background-color: #111;
 }
 
 @media only screen and (max-width: 1070px) {
 
-	.iphonePreview {
-		background-size: 370px auto;
+	.iphonePreviewBlock {
+		--frame-w: 370px;
+		--screen-x: 24px;
+		--screen-y: 22px;
+		--screen-w: 322px;
+		--screen-h: 698px;
+		--screen-radius: 31px;
 	}
 
-	.iphoneScreen {
-		width: 322px;
-		margin-left: 24px;
-		margin-top: 22px;
-	}
-
-	.videoContainer {
-		width: 322px;
-		height: 698px;
-		margin-left: 24px;
-		margin-top: 22px;
-	}
-	
-	.videoContainer > video {
-		width: 322px;
-		height: 698px;
-	}
-	
-} 
+}
 
 @media only screen and (max-width: 992px) {
 
-	.iphonePreview {
+	.iphonePreviewBlock {
+		margin-top: 20px;
+		margin-bottom: 8px;
+		padding-bottom: 12px;
 		display: flex;
-		background-size: 260px auto;
-		background-position: center 0;
-		margin-top: 47px;
-		justify-content: center;
-		padding-bottom: 75px;
+		flex-direction: column;
+		align-items: center;
+		--frame-w: min(280px, calc(100vw - 56px));
+		--screen-x: calc(var(--frame-w) * 26 / 400);
+		--screen-y: calc(var(--frame-w) * 23 / 400);
+		--screen-w: calc(var(--frame-w) * 349 / 400);
+		--screen-h: calc(var(--frame-w) * 755 / 400);
+		--screen-radius: calc(var(--frame-w) * 34 / 400);
 	}
 
-	.iphoneScreen {
-		width: 226px;
-		height: 488px;
-		-webkit-clip-path: url(#screenMask);
-		clip-path: url(#screenMask);
-		margin: 0px;
-		margin-top: 17px;
+}
+
+@media only screen and (max-width: 480px) {
+
+	.iphonePreviewBlock {
+		margin-top: 16px;
+		--frame-w: min(240px, calc(100vw - 48px));
 	}
 
-	.videoContainer {
-		width: 226px;
-		height: 488px;
-		margin-left: 0px;
-		margin-top: 17px;
+	.appIconLarge {
+		width: 96px;
+		height: 96px;
 	}
 
-	.videoContainer > video {
-		width: 226px;
-		height: 488px;
+	.downloadButtonsContainer {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 12px;
+		width: 100%;
+		margin-top: 28px;
 	}
-	
-} 
+
+	.appStore,
+	.playStore {
+		height: 54px;
+		width: auto;
+		max-width: min(220px, 100%);
+		margin-right: 0;
+		margin-bottom: 0;
+	}
+
+	.feature {
+		padding-top: 28px;
+	}
+
+	.feature:nth-child(-n+3),
+	.feature:nth-child(1) {
+		padding-top: 28px;
+	}
+
+	.feature:nth-child(1) {
+		padding-top: 0;
+	}
+
+	.featureText > h3 {
+		font-size: 1.8rem;
+	}
+
+	.featureText > p {
+		font-size: 1.5rem;
+	}
+
+	.footerText {
+		padding-top: 40px;
+		padding-bottom: 40px;
+		font-size: 1.5rem;
+	}
+
+	.whatsNewTitle {
+		font-size: 2rem;
+	}
+
+	.whatsNewBody {
+		font-size: 1.6rem;
+	}
+
+}
+
+@media only screen and (max-width: 375px) {
+
+	.portfolioTitle {
+		font-size: 2.4rem;
+	}
+
+}
 
 
 // Feature List
 
-.features {
+.appDetailsColumn {
 	grid-area: c;
+	width: 100%;
+}
+
+.features {
 	display: flex;
 	flex: 0 1 auto;
 	align-content: flex-start;
 	justify-content: flex-start;
 	flex-grow: 1;
 	flex-wrap: wrap;
-	margin-top: 93px;
+	margin-top: 48px;
+	width: 100%;
 }
 
 .feature {
@@ -684,4 +966,939 @@ footer {
 
 .hidden {
 	display: none;
+}
+
+.screenshotControls {
+	position: absolute;
+	left: var(--screen-x);
+	top: calc(var(--screen-y) + var(--screen-h) / 2);
+	transform: translateY(-50%);
+	width: var(--screen-w);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 2px;
+	box-sizing: border-box;
+	z-index: 3;
+	pointer-events: none;
+}
+
+.screenshotMeta {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 8px;
+	margin-top: 12px;
+	margin-left: var(--screen-x);
+	width: var(--screen-w);
+}
+
+.screenshotBtn {
+	width: 36px;
+	height: 36px;
+	border-radius: 50%;
+	border: none;
+	background: rgba(0, 0, 0, 0.55);
+	color: #fff;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 1.3rem;
+	line-height: 1;
+	padding: 0;
+	pointer-events: auto;
+	flex-shrink: 0;
+}
+
+.screenshotBtn:hover {
+	background: rgba(0, 0, 0, 0.72);
+}
+
+.screenshotCounter {
+	color: rgba(255, 255, 255, 0.9);
+	font-size: 1.5rem;
+	font-weight: 600;
+	text-align: center;
+	line-height: 1.2;
+	white-space: nowrap;
+}
+
+.screenshotDots {
+	display: flex;
+	gap: 6px;
+	flex-wrap: wrap;
+	justify-content: center;
+	max-width: 280px;
+}
+
+.screenshotDot {
+	width: 7px;
+	height: 7px;
+	border-radius: 50%;
+	border: none;
+	background: rgba(255, 255, 255, 0.4);
+	padding: 0;
+	cursor: pointer;
+}
+
+.screenshotDot.active {
+	background: rgba(255, 255, 255, 1);
+	transform: scale(1.25);
+}
+
+@media only screen and (max-width: 1070px) {
+	.screenshotMeta {
+		margin-left: var(--screen-x);
+		width: var(--screen-w);
+	}
+}
+
+@media only screen and (max-width: 992px) {
+	.screenshotMeta {
+		margin-left: 0;
+		width: var(--screen-w);
+		max-width: 100%;
+		margin-top: 10px;
+		align-self: center;
+	}
+
+	.screenshotControls {
+		left: var(--screen-x);
+		width: var(--screen-w);
+		max-width: 100%;
+	}
+
+	.screenshotBtn {
+		width: 32px;
+		height: 32px;
+		font-size: 1.1rem;
+	}
+
+	.screenshotCounter {
+		font-size: 1.3rem;
+	}
+}
+
+// App detail — simplified header
+
+.appPageHeader {
+	display: flex;
+	align-items: center;
+	min-height: 48px;
+	padding: 10px 0 6px;
+}
+
+.appBackLink {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	color: rgba($header-title-color, 0.88);
+	font-size: 1.6rem;
+	font-weight: 600;
+	line-height: 1.2;
+	text-decoration: none;
+	transition: color 0.15s ease;
+
+	i {
+		font-size: 1.3rem;
+		opacity: 0.85;
+	}
+
+	&:hover,
+	&:active {
+		color: $header-title-color;
+	}
+}
+
+// Portfolio homepage
+
+.portfolioPage {
+	background-color: $body-color;
+}
+
+.portfolioHero {
+	position: relative;
+	min-height: 0;
+	height: auto;
+	border-radius: 0px 0px 40px 40px;
+	overflow: hidden;
+
+	&::after {
+		content: "";
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		height: 120px;
+		background: linear-gradient(
+			to bottom,
+			rgba($image-overlay-color, 0) 0%,
+			rgba($image-overlay-color, 0.45) 100%
+		);
+		pointer-events: none;
+		z-index: 0;
+	}
+
+	.portfolioHeaderBackground,
+	.portfolioHeroContainer {
+		position: relative;
+		z-index: 1;
+	}
+}
+
+.portfolioHeroContainer {
+	grid-template-rows: auto auto;
+	grid-template-areas:
+		"h h h h h h h h h h h h"
+		"t t t t t t t t t t t t";
+}
+
+.portfolioAppsSection {
+	background-color: #fff;
+}
+
+.portfolioAppsContainer {
+	grid-template-rows: auto auto;
+	grid-template-areas:
+		"g g g g g g g g g g g g"
+		"f f f f f f f f f f f f";
+}
+
+.portfolioHeroContainer header,
+.portfolioHeaderBar {
+	justify-content: flex-end;
+	height: auto;
+	min-height: 96px;
+	padding-top: 12px;
+	padding-bottom: 8px;
+	align-items: center;
+}
+
+.portfolioHeaderBar {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	width: 100%;
+	margin-right: 0;
+}
+
+.portfolioNav {
+	height: auto;
+	justify-content: flex-end;
+	flex: 1 1 auto;
+	min-width: 0;
+}
+
+@media only screen and (max-width: 768px) {
+	.portfolioHero {
+		border-radius: 0;
+
+		&::after {
+			display: none;
+		}
+	}
+
+	.portfolioHeroContainer header,
+	.portfolioHeaderBar {
+		min-height: 0;
+		padding-top: 8px;
+		padding-bottom: 4px;
+	}
+
+	.portfolioHeaderBar {
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+		gap: 8px;
+	}
+
+	.portfolioNav.scroll {
+		height: auto;
+		padding-top: 0;
+		padding-bottom: 0;
+		margin-top: 0;
+		justify-content: flex-start;
+		width: auto;
+		flex: 1 1 auto;
+	}
+
+	.portfolioIntro {
+		padding-top: 8px;
+		padding-bottom: 20px;
+	}
+
+	.portfolioTitle {
+		font-size: 2.6rem;
+		margin-bottom: 10px;
+		line-height: 1.2;
+		padding: 0 4px;
+	}
+
+	.portfolioSubtitle {
+		font-size: 1.5rem;
+		line-height: 1.5;
+		padding: 0 12px;
+	}
+
+	.portfolioAppsSection {
+		border-radius: 20px 20px 0 0;
+		margin-top: -16px;
+		position: relative;
+		z-index: 2;
+	}
+
+	.portfolioAppsContainer footer .footerText {
+		padding-top: 32px;
+		padding-bottom: 36px;
+	}
+
+	.appHero.imageWrapper {
+		border-radius: 0 0 20px 20px;
+	}
+
+	.appPageHeader {
+		min-height: 44px;
+		padding: 6px 0 4px;
+	}
+}
+
+.portfolioIntro {
+	grid-area: t;
+	text-align: center;
+	padding-top: 28px;
+	padding-bottom: 32px;
+}
+
+.portfolioTitle {
+	color: $app-title-color;
+	font-size: 4rem;
+	margin-bottom: 20px;
+}
+
+.portfolioSubtitle {
+	color: $app-description-color;
+	font-size: 2.2rem;
+	line-height: 1.5;
+	max-width: 720px;
+	margin: 0 auto;
+	opacity: 0.9;
+}
+
+.appGrid {
+	grid-area: g;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	row-gap: 112px;
+	column-gap: 36px;
+	padding-top: 52px;
+	padding-bottom: 64px;
+}
+
+// Mobile list layout (≤768px) — must win over tablet/desktop card rules
+@media only screen and (max-width: 768px) {
+	.appGrid {
+		grid-template-columns: 1fr;
+		row-gap: 0;
+		column-gap: 0;
+		padding-top: 4px;
+		padding-bottom: 16px;
+	}
+
+	.appCard {
+		position: static;
+		flex-direction: row;
+		align-items: center;
+		gap: 14px;
+		padding: 14px 0;
+		border-radius: 0;
+		box-shadow: none;
+		background: transparent;
+		border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+		overflow: visible;
+		transform: none;
+	}
+
+	.appCard:last-child {
+		border-bottom: none;
+	}
+
+	.appCard:hover {
+		transform: none;
+		box-shadow: none;
+	}
+
+	.appCardVisual {
+		position: static;
+		top: auto;
+		left: auto;
+		transform: none;
+		z-index: auto;
+		flex-shrink: 0;
+		width: 52px;
+		height: 52px;
+	}
+
+	.appCardIconFrame {
+		width: 52px;
+		height: 52px;
+		border-radius: 12px;
+		padding: 0;
+		box-shadow: none;
+	}
+
+	.appCardIcon {
+		border-radius: 12px;
+	}
+
+	.appCardBody {
+		position: static;
+		z-index: auto;
+		flex: 1;
+		min-width: 0;
+		text-align: left;
+		align-items: flex-start;
+	}
+
+	.appCardName {
+		color: $feature-title-color;
+		font-size: 1.7rem;
+		font-weight: 700;
+		margin-bottom: 2px;
+		padding-right: 0;
+		line-height: 1.3;
+	}
+
+	.appCardPrice {
+		color: $accent-color;
+		font-size: 1.3rem;
+		font-weight: 600;
+		margin-bottom: 4px;
+		min-height: 0;
+	}
+
+	.appCardDesc {
+		color: $feature-text-color;
+		font-size: 1.35rem;
+		line-height: 1.45;
+		-webkit-line-clamp: 2;
+	}
+
+	.appCardLink {
+		flex-shrink: 0;
+		align-self: center;
+		margin-top: 0;
+		font-size: 0;
+		line-height: 1;
+		color: rgba($accent-color, 0.45);
+
+		&::after {
+			content: "›";
+			font-size: 2.6rem;
+			font-weight: 400;
+		}
+	}
+}
+
+// Tablet + desktop card layout (≥769px)
+@media only screen and (min-width: 769px) {
+	.appGrid {
+		grid-template-columns: 1fr;
+		row-gap: 96px;
+		padding-top: 48px;
+	}
+
+	@media only screen and (min-width: 993px) {
+		.appGrid {
+			grid-template-columns: repeat(2, 1fr);
+			row-gap: 112px;
+			column-gap: 36px;
+			padding-top: 52px;
+			padding-bottom: 64px;
+		}
+	}
+
+	.appCard {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+		text-align: left;
+		padding: 88px 32px 36px;
+		background: #ffffff;
+		border-radius: 24px;
+		box-shadow:
+			0 4px 6px rgba(0, 0, 0, 0.04),
+			0 16px 40px rgba(0, 0, 0, 0.14);
+		transition: transform 0.22s ease, box-shadow 0.22s ease;
+		color: inherit;
+		overflow: visible;
+	}
+
+	.appCard:hover {
+		transform: translateY(-6px);
+		box-shadow:
+			0 8px 12px rgba(0, 0, 0, 0.06),
+			0 24px 48px rgba(0, 0, 0, 0.18);
+	}
+
+	.appCardVisual {
+		position: absolute;
+		top: 0;
+		left: 32px;
+		transform: translateY(-50%);
+		z-index: 2;
+	}
+
+	.appCardIconFrame {
+		width: 88px;
+		height: 88px;
+		border-radius: 20px;
+		padding: 3px;
+		background: #ffffff;
+		box-shadow:
+			0 8px 20px rgba(0, 0, 0, 0.16),
+			0 2px 6px rgba(0, 0, 0, 0.08);
+	}
+
+	.appCardIcon {
+		display: block;
+		width: 100%;
+		height: 100%;
+		border-radius: 17px;
+		object-fit: cover;
+		background: linear-gradient(135deg, #d8d8d8 0%, #efefef 100%);
+	}
+
+	.appCardBody {
+		position: relative;
+		z-index: 1;
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+		min-height: 0;
+	}
+
+	.appCardName {
+		color: $feature-title-color;
+		font-size: 2.2rem;
+		font-weight: 700;
+		margin-bottom: 8px;
+		line-height: 1.3;
+		padding-right: 8px;
+	}
+
+	.appCardPrice {
+		color: $accent-color;
+		font-size: 1.6rem;
+		font-weight: 600;
+		margin-bottom: 16px;
+		min-height: 1.6rem;
+	}
+
+	.appCardDesc {
+		color: $feature-text-color;
+		font-size: 1.7rem;
+		line-height: 1.6;
+		flex: 1;
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+
+	.appCardLink {
+		color: $accent-color;
+		font-size: 1.5rem;
+		margin-top: 22px;
+		font-weight: 600;
+		align-self: flex-start;
+
+		&::after {
+			content: none;
+		}
+	}
+
+	@media only screen and (max-width: 992px) {
+		.appCard {
+			padding: 84px 28px 32px;
+		}
+
+		.appCardVisual {
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+
+		.appCardBody {
+			text-align: center;
+			align-items: center;
+		}
+
+		.appCardLink {
+			align-self: center;
+		}
+	}
+}
+
+.appCard {
+	display: flex;
+	color: inherit;
+	text-decoration: none;
+}
+
+.appCardIcon {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	opacity: 1;
+	transition: opacity 0.25s ease;
+}
+
+.appCardIcon:not([src]),
+.appCardIcon[src=""] {
+	opacity: 1;
+}
+
+.appCardIcon.is-loaded {
+	opacity: 1;
+}
+
+@media (hover: none) and (min-width: 769px) {
+	.appCard:hover {
+		transform: none;
+		box-shadow:
+			0 4px 6px rgba(0, 0, 0, 0.04),
+			0 16px 40px rgba(0, 0, 0, 0.14);
+	}
+}
+
+.headerSiteTitle {
+	color: $header-title-color;
+	font-weight: bold;
+	font-size: 2rem;
+	white-space: nowrap;
+}
+
+.appHeroCustom {
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: top;
+}
+
+// What's New
+
+.whatsNew {
+	width: 100%;
+	margin-top: 48px;
+	padding-top: 40px;
+	border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.whatsNewTitle {
+	color: $feature-title-color;
+	font-size: 2.4rem;
+	margin-bottom: 20px;
+}
+
+.whatsNewVersion {
+	color: $feature-title-color;
+	font-size: 1.8rem;
+	font-weight: 600;
+	margin-bottom: 12px;
+}
+
+.whatsNewEntry {
+	margin-bottom: 24px;
+}
+
+.whatsNewEntryTitle {
+	color: $feature-text-color;
+	margin-bottom: 8px;
+}
+
+.whatsNewList {
+	list-style: disc;
+	padding-left: 22px;
+	color: $feature-text-color;
+	line-height: 1.6;
+}
+
+.whatsNewList li {
+	margin-bottom: 8px;
+}
+
+.whatsNewBody {
+	color: $feature-text-color;
+	line-height: 1.6;
+	font-size: 1.8rem;
+}
+
+.whatsNewBody p {
+	margin-bottom: 12px;
+}
+
+// What's New hub page
+
+.whatsNewHubContainer {
+	grid-template-rows: 115px auto auto;
+}
+
+.whatsNewHub {
+	grid-column: 1 / -1;
+	max-width: 800px;
+	margin: 0 auto;
+	padding-top: 40px;
+	padding-bottom: 60px;
+}
+
+.whatsNewHubTitle {
+	font-size: 3.2rem;
+	margin-bottom: 12px;
+}
+
+.whatsNewHubIntro {
+	color: $feature-text-color;
+	font-size: 1.8rem;
+	line-height: 1.5;
+	margin-bottom: 40px;
+}
+
+.whatsNewHubSection {
+	padding-bottom: 36px;
+	margin-bottom: 36px;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.whatsNewHubSection:last-child {
+	border-bottom: none;
+	margin-bottom: 0;
+}
+
+.whatsNewHubAppLink {
+	text-decoration: none;
+	color: inherit;
+}
+
+.whatsNewHubAppName {
+	font-size: 2.4rem;
+	margin-bottom: 16px;
+	color: $feature-title-color;
+}
+
+.whatsNewHubAppLink:hover .whatsNewHubAppName {
+	color: $accent-color;
+}
+
+.whatsNewHubSection .whatsNew {
+	border-top: none;
+	padding-top: 0;
+	margin-top: 0;
+}
+
+@media only screen and (max-width: 992px) {
+	.whatsNew {
+		margin-top: 32px;
+		padding-top: 28px;
+	}
+}
+
+// Per-app legal pages (privacy / terms)
+
+.legalContainer {
+	grid-template-rows: auto auto auto;
+	grid-template-areas:
+		"h h h h h h h h h h h h"
+		"c c c c c c c c c c c c"
+		"f f f f f f f f f f f f";
+}
+
+.legalPageHeader {
+	grid-area: h;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	margin-right: 0;
+	min-height: 56px;
+	padding: 12px 0;
+}
+
+.legalBackLink {
+	color: rgba(#000, 0.72);
+
+	&:hover,
+	&:active {
+		color: #000;
+	}
+}
+
+.langToggle {
+	display: inline-flex;
+	align-items: center;
+	padding: 3px;
+	border-radius: 999px;
+	background: rgba(0, 0, 0, 0.06);
+	flex-shrink: 0;
+}
+
+.langToggleBtn {
+	border: none;
+	background: transparent;
+	color: rgba(0, 0, 0, 0.55);
+	font-size: 1.3rem;
+	font-weight: 600;
+	line-height: 1;
+	padding: 8px 12px;
+	border-radius: 999px;
+	cursor: pointer;
+	transition: background 0.15s ease, color 0.15s ease;
+}
+
+.langToggleBtn.is-active {
+	background: #fff;
+	color: #000;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.langToggle--onDark {
+	background: rgba(255, 255, 255, 0.14);
+}
+
+.langToggle--onDark .langToggleBtn {
+	color: rgba(255, 255, 255, 0.7);
+}
+
+.langToggle--onDark .langToggleBtn.is-active {
+	background: rgba(255, 255, 255, 0.95);
+	color: #111;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.legalArticle {
+	grid-area: c;
+	grid-column: 2 / 12;
+	max-width: 760px;
+	margin: 0 auto;
+	width: 100%;
+	padding-top: 12px;
+	padding-bottom: 40px;
+}
+
+.legalMeta {
+	color: $feature-text-color;
+	font-size: 1.5rem;
+	line-height: 1.5;
+	margin-bottom: 24px;
+}
+
+.legalPanel h1 {
+	font-size: 3rem;
+	line-height: 1.25;
+	margin-bottom: 16px;
+	color: $feature-title-color;
+}
+
+.legalPanel h2 {
+	font-size: 2.2rem;
+	margin-top: 32px;
+	margin-bottom: 12px;
+	color: $feature-title-color;
+}
+
+.legalPanel h3 {
+	font-size: 1.8rem;
+	margin-top: 20px;
+	margin-bottom: 8px;
+	color: $feature-title-color;
+}
+
+.legalPanel p,
+.legalPanel li {
+	color: $feature-text-color;
+	font-size: 1.7rem;
+	line-height: 1.65;
+}
+
+.legalPanel p {
+	margin-bottom: 14px;
+}
+
+.legalPanel ul {
+	padding-left: 1.4em;
+	margin-bottom: 14px;
+}
+
+.legalPanel li {
+	margin-bottom: 8px;
+}
+
+.legalTable {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 16px 0 20px;
+	font-size: 1.5rem;
+	display: block;
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+.legalTable th,
+.legalTable td {
+	border: 1px solid rgba(0, 0, 0, 0.12);
+	padding: 10px 12px;
+	text-align: left;
+	vertical-align: top;
+	color: $feature-text-color;
+	line-height: 1.5;
+}
+
+.legalTable th {
+	background: rgba(0, 0, 0, 0.04);
+	color: $feature-title-color;
+	font-weight: 600;
+}
+
+.legalCopyright {
+	margin-top: 28px;
+	padding-top: 16px;
+	border-top: 1px solid rgba(0, 0, 0, 0.08);
+	font-size: 1.5rem;
+	color: $feature-text-color;
+}
+
+.legalFooter {
+	grid-area: f;
+	display: flex;
+	justify-content: center;
+	padding-bottom: 48px;
+}
+
+.legalFooter .footerLinks {
+	padding-bottom: 0;
+}
+
+@media only screen and (max-width: 768px) {
+	.legalArticle {
+		grid-column: 1 / -1;
+		padding-top: 8px;
+	}
+
+	.legalPanel h1 {
+		font-size: 2.4rem;
+	}
+
+	.legalPanel h2 {
+		font-size: 1.9rem;
+	}
+
+	.legalPanel p,
+	.legalPanel li {
+		font-size: 1.55rem;
+	}
+
+	.langToggleBtn {
+		font-size: 1.2rem;
+		padding: 7px 10px;
+	}
 }

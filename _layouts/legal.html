@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% include head.html %}
+
+<body class="subPageBody legalPageBody">
+    <div class="headerBackground subPageHeaderBackground legalHeaderBackground">
+        <div class="container subPageContainer legalContainer">
+            <header class="appPageHeader legalPageHeader">
+                <a class="appBackLink legalBackLink" href="{{ '/apps/' | append: page.app_slug | append: '/' | relative_url }}" target="_self">
+                    <i class="fas fa-chevron-left" aria-hidden="true"></i>
+                    <span>{{ page.app_name }}</span>
+                </a>
+            </header>
+
+            <article class="page markdown-body legalArticle" id="legalArticle">
+                {% assign legal_body = content | strip %}
+                {% if legal_body != "" %}
+                    {{ content }}
+                {% elsif page.doc_type == 'privacy' %}
+                    {% if page.app_name == 'Bloom Grid'%}
+                        {% include legal-bloom-grid-privacy.html app_name=page.app_name %}    
+                    {% elsif page.app_name == 'Formulia Calendar'%}
+                        {% include legal-formulia-calendar-privacy.html app_name=page.app_name %}    
+                    {% elsif page.app_name == 'Marble-O-Tron'%}
+                        {% include legal-marble-o-tron-privacy.html app_name=page.app_name %}
+                    {% else %}
+                        {% include legal-privacy-placeholder.html app_name=page.app_name %}
+                        
+                    {% endif %}
+                {% elsif page.doc_type == 'terms' %}
+                    {% include legal-terms-placeholder.html app_name=page.app_name %}
+                {% endif %}
+            </article>
+
+            <footer class="legalFooter">
+                <div class="footerLinks">
+                    <a href="{{ '/apps/' | append: page.app_slug | append: '/' | relative_url }}" target="_self">{{ page.app_name }}</a>
+                    {% if page.doc_type == 'privacy' %}
+                        <!-- <a href="{{ '/apps/' | append: page.app_slug | append: '/terms/' | relative_url }}" target="_self">
+                            <span class="langLabel" data-lang="en">Terms of Use</span>
+                        </a> -->
+                    {% else %}
+                        <a href="{{ '/apps/' | append: page.app_slug | append: '/privacy/' | relative_url }}" target="_self">
+                            <span class="langLabel" data-lang="en">Privacy Policy</span>
+                        </a>
+                    {% endif %}
+                    <a href="{{ '/changelog/' | relative_url }}" target="_self">
+                        <span class="langLabel" data-lang="en">What's New</span>
+                    </a>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+</body>
+</html>
