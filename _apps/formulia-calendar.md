@@ -4,7 +4,7 @@ layout: app
 app_name: Formulia Calendar
 ios_app_id: 6817807399
 app_description: A F1 race weekend calendar app tracking race and session start times alone with race results
-device_color: blue
+device_color: black
 features:
   - title                                 : Countdown to next race session
     description                           : See when the next track session is starting in your local time

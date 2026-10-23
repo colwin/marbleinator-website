@@ -4,7 +4,7 @@ layout: app
 app_name: Marble-O-Tron
 ios_app_id: 1575184675
 app_description: A relaxing and satisfying marble matching game
-device_color: blue
+device_color: black
 features:
   - title                                 : Multiple Marble Packs
     description                           : Choose between multiple colourful marble packs! 

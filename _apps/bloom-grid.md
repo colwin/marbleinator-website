@@ -4,7 +4,7 @@ layout: app
 app_name: Bloom Grid
 ios_app_id: 6824977865
 app_description: A relaxing tetris inspired block clearing game
-device_color: blue
+device_color: black
 features:
   - title                                 : Tetris inspired gameplay
     description                           : Relive the nostalgia of your childhood
